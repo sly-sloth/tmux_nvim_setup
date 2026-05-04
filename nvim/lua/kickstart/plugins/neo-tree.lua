@@ -10,6 +10,24 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
+    {
+      -- Add window picker dependency
+      's1n7ax/nvim-window-picker',
+      version = '2.*',
+      config = function()
+        require('window-picker').setup {
+          filter_rules = {
+            include_current_win = false,
+            autoselect_one = true,
+            -- Ignore these types of windows so you don't accidentally open files in them
+            bo = {
+              filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
+              buftype = { 'terminal', 'quickfix' },
+            },
+          },
+        }
+      end,
+    },
   },
   lazy = false,
   keys = {
